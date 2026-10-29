@@ -450,7 +450,8 @@ $("#form").addEventListener("submit", async e => {
 
   const t = ticket();
   const now = new Date();
-  const receipt = "AIM-" + now.toISOString().slice(2,10).replace(/-/g,"") + "-" + Math.random().toString(36).slice(2,6).toUpperCase();
+  const kst = new Date(now.getTime() + 9*3600*1000).toISOString().slice(2,10).replace(/-/g,"");  // 한국 날짜 기준
+  const receipt = "AIM-" + kst + "-" + Math.random().toString(36).slice(2,6).toUpperCase();
   const data = {
     receipt,
     timestamp: now.toISOString(),
