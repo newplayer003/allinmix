@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ALL in MIX 신청</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<meta property="og:title" content="ALL in MIX">
+<meta property="og:description" content="NEW PLAYER 003 presents ALL in MIX · 2026.11.28 (토) 성수율">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
@@ -26,26 +27,24 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box}
-html,body{margin:0}
-body{background:var(--bg);color:var(--fg);font-family:var(--kr);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
-.wrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 72px}
-.en{font-family:var(--en)}
+html,body{margin:0;max-width:100%;overflow-x:hidden;overflow-x:clip}
+body{background:var(--bg);color:var(--fg);font-family:var(--kr);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;position:relative}
+.wrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 72px;overflow:hidden}
 
 /* ---------- hero ---------- */
-.hero{position:relative;text-align:center;padding-block:48px 8px;isolation:isolate}
+.hero{position:relative;text-align:center;padding-block:48px 8px;isolation:isolate;overflow:hidden}
 .eyebrow{font-family:var(--en);font-weight:500;font-size:11px;letter-spacing:.36em;color:var(--fg-2);text-transform:uppercase;margin:0 0 10px}
 
-.undefined{font-family:var(--en);font-weight:700;font-size:clamp(34px,10vw,64px);letter-spacing:.18em;line-height:1;margin:0;
+.undefined{font-family:var(--en);font-weight:700;font-size:clamp(30px,9vw,64px);letter-spacing:.18em;line-height:1;margin:0;
   position:relative;z-index:2;color:transparent;-webkit-text-stroke:1px var(--fg);text-stroke:1px var(--fg);
-  transform:translateY(38%);mix-blend-mode:screen;user-select:none}
+  transform:translateY(38%);mix-blend-mode:screen;user-select:none;white-space:nowrap}
 .undefined::before,.undefined::after{content:attr(data-t);position:absolute;inset:0;-webkit-text-stroke:0;pointer-events:none}
 .undefined::before{color:var(--red-2);clip-path:inset(0 0 0 0);animation:glitchA 4.6s steps(1) infinite;opacity:.85}
 .undefined::after{color:#8ff;clip-path:inset(0 0 0 0);animation:glitchB 5.1s steps(1) infinite -2s;opacity:.55}
 @keyframes glitchA{0%,91%,100%{clip-path:inset(100% 0 0 0);transform:none}92%{clip-path:inset(12% 0 68% 0);transform:translate(-6px,0)}94%{clip-path:inset(62% 0 10% 0);transform:translate(5px,0)}96%{clip-path:inset(30% 0 40% 0);transform:translate(-3px,0)}98%{clip-path:inset(100% 0 0 0)}}
 @keyframes glitchB{0%,88%,100%{clip-path:inset(100% 0 0 0);transform:none}89%{clip-path:inset(45% 0 30% 0);transform:translate(6px,0)}92%{clip-path:inset(5% 0 80% 0);transform:translate(-5px,0)}95%{clip-path:inset(70% 0 5% 0);transform:translate(3px,0)}97%{clip-path:inset(100% 0 0 0)}}
 
-.sky{position:relative;width:min(300px,68vw);max-width:100%;aspect-ratio:1;margin:0 auto 30px}
+.sky{position:relative;width:min(300px,68vw);max-width:100%;aspect-ratio:1;margin:0 auto 30px;container-type:inline-size}
 .smoke{position:absolute;inset:-40%;z-index:-1;pointer-events:none}
 .smoke i{position:absolute;border-radius:50%;filter:blur(38px);opacity:.55;background:var(--smoke);mix-blend-mode:screen}
 .smoke i:nth-child(1){width:60%;height:38%;left:10%;top:42%;animation:drift 26s ease-in-out infinite alternate}
@@ -53,7 +52,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .smoke i:nth-child(3){width:42%;height:26%;left:26%;top:60%;opacity:.35;background:var(--red-dim);animation:drift 30s ease-in-out -17s infinite alternate}
 @keyframes drift{from{transform:translate(-6%,2%) scale(1)}to{transform:translate(8%,-5%) scale(1.15)}}
 
-/* the sun: an uneven corona that rotates a full turn */
 .sun{position:absolute;inset:-6%;border-radius:50%;animation:spin 28s linear infinite;
   background:conic-gradient(from 0deg,
     rgba(216,15,38,.0) 0deg, rgba(255,36,56,.85) 18deg, rgba(216,15,38,.15) 40deg,
@@ -73,50 +71,35 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .flare{position:absolute;width:10px;height:10px;left:50%;top:50%;margin:-5px;border-radius:50%;background:#fff;box-shadow:0 0 14px 4px #fff,0 0 40px 12px var(--red-2);
   animation:orbit 28s linear infinite}
 @keyframes orbit{from{transform:rotate(0deg) translate(0,-50cqw) rotate(0deg)}to{transform:rotate(360deg) translate(0,-50cqw) rotate(-360deg)}}
-.sky{container-type:inline-size}
 .main-image{display:none;position:absolute;inset:4%;border-radius:50%;object-fit:cover;width:92%;height:92%}
 .sky.has-image .disc{display:none}.sky.has-image .main-image{display:block}
 
 h1{font-family:var(--en);font-weight:700;font-size:clamp(40px,10.5vw,68px);line-height:.95;letter-spacing:.04em;margin:0;text-wrap:balance}
 h1 em{font-style:italic;font-weight:300;color:var(--red-2);letter-spacing:0}
-.sub{font-size:15px;color:var(--fg-2);margin:14px 0 0}
 .meta{display:grid;gap:6px;margin:26px auto 0;font-family:var(--en);font-size:12px;letter-spacing:.1em;color:var(--fg-2);text-transform:uppercase}
 .meta b{color:var(--fg);font-weight:500;font-family:var(--kr);letter-spacing:.02em;text-transform:none}
+.maps{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px 0 0}
+.maps a{font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--fg);text-decoration:none;border:1px solid var(--line);padding:7px 14px;transition:border-color .2s,color .2s}
+.maps a:hover{border-color:var(--red-2);color:var(--red-2)}
 .share{max-width:420px;margin:12px auto 0}
 .share-btn{display:block;width:100%;background:transparent;border:1px solid var(--red-2);color:var(--red-2);cursor:pointer;
   font:italic 300 18px var(--en);letter-spacing:.12em;padding:11px 18px;transition:all .2s}
 .share-btn:hover{background:var(--red-2);color:#fff}
-.maps{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px 0 0}
-.maps a{font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--fg);text-decoration:none;border:1px solid var(--line);padding:7px 14px;transition:border-color .2s,color .2s}
-.maps a:hover{border-color:var(--red-2);color:var(--red-2)}
-
-/* price list */
-.info{margin-top:40px;text-align:left}
-.info h2{font-weight:600;font-size:18px;margin:0 0 6px;letter-spacing:-.01em}
-.info .inc{font-size:13px;color:var(--fg-2);margin:0 0 14px}
-.prices{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.prices div{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:14px 4px;border-bottom:1px solid var(--line);align-items:baseline}
-.prices div:last-child{border-bottom:0}
-.prices .t{font-weight:500}
-.prices .p{font-family:var(--en);font-weight:500;font-size:16px;color:var(--red-2);font-variant-numeric:tabular-nums}
-.prices .note{grid-column:1/-1;font-size:12px;color:var(--fg-2)}
-.prices .tag{font-family:var(--en);font-size:10px;letter-spacing:.16em;color:var(--red-2);margin-left:8px;vertical-align:middle}
 
 /* ---------- ticket / form ---------- */
 .ticket{background:var(--bg-2);border:1px solid var(--line);position:relative;margin-top:36px}
-.ticket::before,.ticket::after{content:"";position:absolute;top:118px;width:22px;height:22px;border-radius:50%;background:var(--bg);border:1px solid var(--line)}
-.ticket::before{left:-12px}.ticket::after{right:-12px}
 .ticket-head{padding:26px 28px 22px;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
 .ticket-head h2{font-weight:600;font-size:21px;margin:0;letter-spacing:-.01em}
 .ticket-head small{font-family:var(--en);font-size:11px;letter-spacing:.24em;color:var(--fg-2)}
 form{padding:8px 28px 28px;display:grid}
-.field{padding:20px 0;border-bottom:1px solid var(--line);display:grid;gap:10px}
+.field{padding:20px 0;border-bottom:1px solid var(--line);display:grid;gap:10px;min-width:0}
 .field:last-of-type{border-bottom:0}
 .lab{font-size:13px;font-weight:500;letter-spacing:.02em;color:var(--fg);display:flex;gap:8px;align-items:baseline}
 .lab .n{font-family:var(--en);font-size:10px;color:var(--red-2);letter-spacing:.14em}
 .lab .req{color:var(--red-2);font-size:12px}
+.lab .opt{font-size:11px;color:var(--fg-2);font-weight:400}
 .hint{font-size:12px;color:var(--fg-2);margin:0}
-input[type=text],input[type=tel],select{width:100%;background:transparent;border:0;border-bottom:1px solid var(--smoke);border-radius:0;color:var(--fg);
+input[type=text],input[type=tel],select{width:100%;min-width:0;background:transparent;border:0;border-bottom:1px solid var(--smoke);border-radius:0;color:var(--fg);
   font:inherit;font-size:17px;padding:8px 0;outline:none;transition:border-color .2s;appearance:none;-webkit-appearance:none}
 input::placeholder{color:#4a4345}
 input:focus,select:focus{border-bottom-color:var(--red-2)}
@@ -126,27 +109,29 @@ select{background-image:linear-gradient(45deg,transparent 50%,var(--fg-2) 50%),l
 select option{background:var(--bg-2)}
 select:invalid{color:#4a4345}
 
-.seg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+/* ticket type list */
+.seg{display:grid;gap:8px}
 .seg input{position:absolute;opacity:0;width:0;height:0}
-.seg label{cursor:pointer;border:1px solid var(--line);padding:14px 16px;display:grid;gap:4px;transition:border-color .2s,background .2s;position:relative}
-.seg label strong{font-weight:500;font-size:15px;display:flex;gap:8px;align-items:center}
-.seg label span.p{font-family:var(--en);font-size:13px;color:var(--fg-2);letter-spacing:.02em}
-.seg label span.tag{font-family:var(--en);font-size:10px;letter-spacing:.16em;color:var(--red-2)}
+.seg label{cursor:pointer;border:1px solid var(--line);padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;transition:border-color .2s,background .2s;position:relative;min-width:0}
+.seg label strong{font-weight:500;font-size:15px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.seg label .p{font-family:var(--en);font-weight:500;font-size:15px;color:var(--red-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.seg label .note{grid-column:1/-1;font-size:12px;color:var(--fg-2)}
+.seg label .tag{font-family:var(--en);font-size:10px;letter-spacing:.16em;color:var(--red-2)}
 .seg input:checked+label{border-color:var(--red-2);background:linear-gradient(180deg,rgba(216,15,38,.12),rgba(216,15,38,.02))}
-.seg input:checked+label::after{content:"";position:absolute;right:12px;top:12px;width:8px;height:8px;border-radius:50%;background:var(--red-2);box-shadow:0 0 10px var(--red-2)}
-.seg label.off{opacity:.45;cursor:not-allowed}
+.seg input:disabled+label{opacity:.45;cursor:not-allowed}
 
 .qty{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .step{display:inline-grid;grid-template-columns:44px 64px 44px;border:1px solid var(--line)}
 .step button{background:transparent;border:0;color:var(--fg);font-size:20px;cursor:pointer;height:44px;font-family:var(--en)}
 .step button:hover{color:var(--red-2)}
+.step button:disabled{opacity:.3;cursor:not-allowed}
 .step output{display:grid;place-items:center;font-family:var(--en);font-size:16px;border-left:1px solid var(--line);border-right:1px solid var(--line);font-variant-numeric:tabular-nums}
 .amount{font-family:var(--en);font-size:13px;color:var(--fg-2);letter-spacing:.04em}
-.amount b{display:block;font-size:22px;font-weight:600;color:var(--red-2);font-variant-numeric:tabular-nums;line-height:1.2}
+.amount b{display:block;font-size:22px;font-weight:600;color:var(--red-2);font-variant-numeric:tabular-nums;line-height:1.2;font-family:var(--kr)}
 
-.acct{border:1px solid var(--line);padding:14px 16px;display:grid;gap:6px;background:#080707}
+.acct{border:1px solid var(--line);padding:14px 16px;display:grid;gap:6px;background:#080707;min-width:0}
 .acct .row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.acct .num{font-family:var(--en);font-weight:500;font-size:16px;letter-spacing:.06em;user-select:all}
+.acct .num{font-family:var(--en);font-weight:500;font-size:16px;letter-spacing:.06em;user-select:all;word-break:break-all}
 .acct .bank{font-size:13px;color:var(--fg-2)}
 .copy{font:500 11px/1 var(--en);letter-spacing:.16em;color:var(--fg);background:transparent;border:1px solid var(--smoke);padding:8px 12px;cursor:pointer;transition:all .2s}
 .copy:hover{border-color:var(--red-2);color:var(--red-2)}
@@ -175,7 +160,7 @@ footer{margin-top:36px;text-align:center;font-family:var(--en);font-size:11px;le
 .demo{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:5;
   font:500 10px/1 var(--en);letter-spacing:.22em;color:var(--fg-2);background:rgba(13,11,11,.9);border:1px solid var(--line);padding:8px 12px;display:none;white-space:nowrap}
 .demo.on{display:block}
-@media (max-width:480px){form,.ticket-head{padding-left:18px;padding-right:18px}.done{padding:40px 18px}.ticket::before,.ticket::after{display:none}}
+@media (max-width:480px){form,.ticket-head{padding-left:18px;padding-right:18px}.done{padding:40px 18px}}
 @media (prefers-reduced-motion:reduce){.smoke i,.corona,.sun,.flare,.undefined::before,.undefined::after{animation:none}}
 </style>
 </head>
@@ -196,18 +181,13 @@ footer{margin-top:36px;text-align:center;font-family:var(--en);font-size:11px;le
     </div>
     <h1>ALL <em>in</em> MIX</h1>
     <div class="meta">
-      <span>Schedule <b>2026년 11월 28일 (토) 오후 6시 – 12시</b></span>
-      <span>Venue <b>성수율 · 서울특별시 성동구 성수이로16길 31</b></span>
+      <span>Schedule <b id="metaDate"></b></span>
+      <span>Venue <b id="metaVenue"></b></span>
     </div>
-    <div class="maps">
-      <a href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%98%EC%9D%B4%EB%A1%9C16%EA%B8%B8%2031" target="_blank" rel="noopener">네이버 지도</a>
-      <a href="https://map.kakao.com/?q=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%98%EC%9D%B4%EB%A1%9C16%EA%B8%B8%2031" target="_blank" rel="noopener">카카오맵</a>
-      <a href="https://www.google.com/maps/search/?api=1&query=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%98%EC%9D%B4%EB%A1%9C16%EA%B8%B8%2031" target="_blank" rel="noopener">구글맵</a>
-    </div>
+    <div class="maps" id="maps"></div>
     <div class="share">
       <button type="button" id="shareBtn" class="share-btn"><span id="shareLabel">share</span></button>
     </div>
-
   </section>
 
   <section class="ticket" id="ticket">
@@ -219,7 +199,7 @@ footer{margin-top:36px;text-align:center;font-family:var(--en);font-size:11px;le
     <form id="form" novalidate>
       <div class="field">
         <label class="lab" for="name"><span class="n">01</span>이름 <span class="req">*</span></label>
-        <input type="text" id="name" name="name" placeholder="홍길동" autocomplete="name" required>
+        <input type="text" id="name" name="name" placeholder="이름을 넣어주세요" autocomplete="name" required>
       </div>
 
       <div class="field">
@@ -229,18 +209,25 @@ footer{margin-top:36px;text-align:center;font-family:var(--en);font-size:11px;le
       </div>
 
       <div class="field">
-        <div class="lab"><span class="n">03</span>티켓 구분 <span class="req">*</span></div>
-        <div class="seg" role="radiogroup" aria-label="티켓 구분">
-          <input type="radio" id="t-early" name="ticket" value="얼리버드" checked>
-          <label for="t-early" id="l-early"><strong>얼리버드 <span class="tag" id="earlyTag2">EARLY</span></strong><span class="p" id="earlyPrice"></span></label>
-          <input type="radio" id="t-regular" name="ticket" value="일반">
-          <label for="t-regular"><strong>일반</strong><span class="p" id="regularPrice"></span></label>
-        </div>
-        <p class="hint" id="refundHint"></p>
+        <label class="lab" for="affiliation"><span class="n">03</span>소속 <span class="req">*</span></label>
+        <select id="affiliation" name="affiliation" required>
+          <option value="" disabled selected>소속을 선택하세요</option>
+        </select>
       </div>
 
       <div class="field">
-        <div class="lab"><span class="n">04</span>티켓 구매 수 <span class="req">*</span></div>
+        <label class="lab" for="inviter"><span class="n">04</span>초대자명 <span class="opt">(선택)</span></label>
+        <input type="text" id="inviter" name="inviter" placeholder="초대해 주신 분의 이름">
+      </div>
+
+      <div class="field">
+        <div class="lab"><span class="n">05</span>티켓 구분 <span class="req">*</span></div>
+        <div class="seg" id="seg" role="radiogroup" aria-label="티켓 구분"></div>
+        <p class="hint">모든 티켓에 프리드링크 1잔이 포함됩니다.</p>
+      </div>
+
+      <div class="field" id="qtyField">
+        <div class="lab"><span class="n">06</span>티켓 구매 수 <span class="req">*</span></div>
         <div class="qty">
           <div class="step" role="group" aria-label="티켓 구매 수">
             <button type="button" id="minus" aria-label="줄이기">−</button>
@@ -253,7 +240,7 @@ footer{margin-top:36px;text-align:center;font-family:var(--en);font-size:11px;le
       </div>
 
       <div class="field">
-        <div class="lab"><span class="n">05</span>입금자명 <span class="req">*</span></div>
+        <div class="lab"><span class="n">07</span>입금자명 <span class="req">*</span></div>
         <div class="acct">
           <div class="row">
             <span class="num" id="acctNum"></span>
@@ -266,20 +253,14 @@ footer{margin-top:36px;text-align:center;font-family:var(--en);font-size:11px;le
       </div>
 
       <div class="field">
-        <label class="lab" for="bank"><span class="n">06</span>입금 은행 <span class="req">*</span></label>
+        <label class="lab" for="bank"><span class="n">08</span>입금 은행 <span class="req">*</span></label>
         <select id="bank" name="bank" required>
           <option value="" disabled selected>입금하실 은행을 선택하세요</option>
-          <option>카카오뱅크</option><option>토스뱅크</option><option>케이뱅크</option>
-          <option>국민은행</option><option>신한은행</option><option>우리은행</option><option>하나은행</option>
-          <option>농협은행</option><option>기업은행</option><option>SC제일은행</option><option>씨티은행</option>
-          <option>새마을금고</option><option>우체국</option><option>수협</option><option>신협</option>
-          <option>대구은행(iM뱅크)</option><option>부산은행</option><option>경남은행</option><option>광주은행</option><option>전북은행</option><option>제주은행</option>
-          <option>기타</option>
         </select>
       </div>
 
       <div class="field">
-        <label class="lab" for="arrival"><span class="n">07</span>예상 도착 시간 <span class="req">*</span></label>
+        <label class="lab" for="arrival"><span class="n">09</span>예상 도착 시간 <span class="req">*</span></label>
         <select id="arrival" name="arrival" required>
           <option value="" disabled selected>오후 6시 – 12시 사이에서 선택</option>
         </select>
@@ -295,18 +276,8 @@ footer{margin-top:36px;text-align:center;font-family:var(--en);font-size:11px;le
     <div class="done" id="done">
       <div class="ring"></div>
       <h3>ADMITTED</h3>
-      <p>신청이 접수되었습니다.<br>입금 확인 후 안내 문자를 드릴게요.</p>
+      <p id="doneText">신청이 접수되었습니다.<br>입금 확인 후 안내 문자를 드릴게요.</p>
       <span class="num" id="doneNum"></span>
-    </div>
-  </section>
-
-  <section class="info">
-    <h2>티켓 안내</h2>
-    <p class="inc">모든 티켓에 프리드링크 1잔이 포함됩니다.</p>
-    <div class="prices">
-      <div><span class="t">얼리버드 티켓<span class="tag" id="earlyTag">EARLY</span></span><span class="p" id="pEarly"></span><span class="note">환불 불가</span></div>
-      <div><span class="t">일반 티켓</span><span class="p" id="pRegular"></span><span class="note">11월 25일 (수) 자정까지 환불 가능 · 별도 문의</span></div>
-      <div><span class="t">테이블</span><span class="p">별도 문의</span><span class="note">11월 21일 (토) 자정까지 환불 가능 · 별도 문의</span></div>
     </div>
   </section>
 
@@ -317,54 +288,89 @@ footer{margin-top:36px;text-align:center;font-family:var(--en);font-size:11px;le
 <script>
 /* ===================== 설정 (여기만 수정하세요) ===================== */
 const CONFIG = {
-  endpoint: "",                           // Google Apps Script 웹앱 URL (배포 후 붙여넣기)
-  earlyPrice: 15000,
-  regularPrice: 20000,
-  earlyDeadline: "",                      // 예: "2026-11-15" (이 날짜가 지나면 얼리버드 선택 불가)
-  bank: "카카오뱅크",                       // 입금받을 계좌
-  accountNumber: "3333-00-0000000",
-  accountHolder: "DJ크루",
+  endpoint: "https://script.google.com/macros/s/AKfycbzLuz234h-ERnFnWnucMNay9BPbqxuPM7WmmW1Hildi5rZ1ChW-kPIP1O9BG2NzZ8Oq/exec",
+
+  event: {
+    title: "ALL in MIX",
+    date: "2026년 11월 28일 (토) 오후 6시 – 12시",
+    venue: "성수율",
+    address: "서울특별시 성동구 성수이로16길 31",
+    startHour: 18, endHour: 24, slotMinutes: 30   // 예상 도착 시간 선택지
+  },
+
+  // 티켓 구분. price: 숫자면 금액, null이면 "별도 문의". deadline이 지나면 자동 마감.
+  tickets: [
+    { id: "early",   label: "얼리버드", price: 15000, deadline: "2026-11-21", note: "11월 21일 (토)까지 · 환불 불가" },
+    { id: "regular", label: "일반",     price: 20000, note: "11월 25일 (수) 자정까지 환불 가능 · 별도 문의" },
+    { id: "table",   label: "테이블 문의", price: null, note: "가격 및 예약은 별도 문의 · 11월 21일 (토) 자정까지 환불 가능" }
+  ],
   maxQty: 10,
-  mainImage: ""                           // 메인 이미지 URL (있으면 일식 디스크 대신 표시)
+
+  affiliations: ["낯대 오리지널", "낯대 Y", "낯대 C", "DJ 지인"],
+
+  banks: ["카카오뱅크","토스뱅크","케이뱅크","국민은행","신한은행","우리은행","하나은행","농협은행","기업은행","SC제일은행","씨티은행",
+          "새마을금고","우체국","수협","신협","대구은행(iM뱅크)","부산은행","경남은행","광주은행","전북은행","제주은행","기타"],
+
+  account: { bank: "카카오뱅크", number: "79422146646", holder: "김명환" },
+
+  mainImage: ""   // 메인 이미지 URL (있으면 일식 디스크 대신 표시)
 };
 /* =================================================================== */
 
 const $ = s => document.querySelector(s);
 const won = n => n.toLocaleString("ko-KR") + "원";
+const today = new Date();
 
+// hero
+$("#metaDate").textContent = CONFIG.event.date;
+$("#metaVenue").textContent = CONFIG.event.venue + " · " + CONFIG.event.address;
+const q = encodeURIComponent(CONFIG.event.address);
+$("#maps").innerHTML = [
+  ["네이버 지도", "https://map.naver.com/p/search/" + q],
+  ["카카오맵", "https://map.kakao.com/?q=" + q],
+  ["구글맵", "https://www.google.com/maps/search/?api=1&query=" + q]
+].map(([t,u]) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join("");
 if (CONFIG.mainImage) { $("#mainImage").src = CONFIG.mainImage; $("#sky").classList.add("has-image"); }
 if (!CONFIG.endpoint) $("#demo").classList.add("on");
 
-$("#pEarly").textContent = won(CONFIG.earlyPrice);
-$("#pRegular").textContent = won(CONFIG.regularPrice);
-$("#earlyPrice").textContent = won(CONFIG.earlyPrice) + " · 환불 불가";
-$("#regularPrice").textContent = won(CONFIG.regularPrice);
-$("#acctNum").textContent = CONFIG.accountNumber;
-$("#acctBank").textContent = CONFIG.bank + " · 예금주 " + CONFIG.accountHolder;
-if (CONFIG.earlyDeadline) {
-  const t = "~" + CONFIG.earlyDeadline.replace(/-/g,".").slice(5);
-  $("#earlyTag").textContent = t; $("#earlyTag2").textContent = t;
-  if (new Date() > new Date(CONFIG.earlyDeadline + "T23:59:59")) {
-    $("#t-early").disabled = true; $("#t-early").checked = false; $("#t-regular").checked = true;
-    $("#l-early").classList.add("off"); $("#earlyTag").textContent = $("#earlyTag2").textContent = "CLOSED";
-  }
+// tickets
+const seg = $("#seg");
+CONFIG.tickets.forEach((t, i) => {
+  const closed = t.deadline && today > new Date(t.deadline + "T23:59:59");
+  const tag = closed ? "CLOSED" : (t.deadline ? "~" + t.deadline.slice(5).replace("-", ".") : "");
+  seg.insertAdjacentHTML("beforeend", `
+    <input type="radio" id="t-${t.id}" name="ticket" value="${t.label}" ${closed ? "disabled" : ""}>
+    <label for="t-${t.id}">
+      <strong>${t.label}${tag ? ` <span class="tag">${tag}</span>` : ""}</strong>
+      <span class="p">${t.price === null ? "별도 문의" : won(t.price)}</span>
+      ${t.note ? `<span class="note">${t.note}</span>` : ""}
+    </label>`);
+});
+const firstOpen = CONFIG.tickets.find(t => !$("#t-" + t.id).disabled);
+if (firstOpen) $("#t-" + firstOpen.id).checked = true;
+const ticket = () => CONFIG.tickets.find(t => $("#t-" + t.id).checked);
+
+// selects
+CONFIG.affiliations.forEach(a => $("#affiliation").insertAdjacentHTML("beforeend", `<option>${a}</option>`));
+CONFIG.banks.forEach(b => $("#bank").insertAdjacentHTML("beforeend", `<option>${b}</option>`));
+for (let m = CONFIG.event.startHour*60; m <= CONFIG.event.endHour*60; m += CONFIG.event.slotMinutes) {
+  const h = Math.floor(m/60), mm = String(m%60).padStart(2,"0");
+  const label = h === 24 ? "자정 12:00" : "오후 " + (h-12) + ":" + mm;
+  $("#arrival").insertAdjacentHTML("beforeend", `<option value="${String(h).padStart(2,"0")}:${mm}">${label}</option>`);
 }
 
-// arrival slots 18:00 – 24:00, 30 min
-const arr = $("#arrival");
-for (let m = 18*60; m <= 24*60; m += 30) {
-  const h = Math.floor(m/60), mm = m%60;
-  const label = (h === 24 ? "자정 12:00" : "오후 " + (h-12) + ":" + String(mm).padStart(2,"0"));
-  const o = document.createElement("option"); o.value = String(h).padStart(2,"0")+":"+String(mm).padStart(2,"0"); o.textContent = label; arr.appendChild(o);
-}
+// account
+$("#acctNum").textContent = CONFIG.account.number;
+$("#acctBank").textContent = CONFIG.account.bank + " · 예금주 " + CONFIG.account.holder;
 
 // quantity + amount
 let qty = 1;
-const unit = () => $("#t-early").checked ? CONFIG.earlyPrice : CONFIG.regularPrice;
 function render(){
+  const t = ticket(), inquiry = !t || t.price === null;
   $("#qtyOut").value = qty; $("#qty").value = qty;
-  $("#totalPrice").textContent = won(unit() * qty);
-  $("#refundHint").textContent = $("#t-early").checked ? "얼리버드 티켓은 환불이 불가합니다." : "일반 티켓은 11월 25일 (수) 자정까지 환불 가능 (별도 문의).";
+  $("#totalPrice").textContent = inquiry ? "별도 문의" : won(t.price * qty);
+  $("#plus").disabled = inquiry || qty >= CONFIG.maxQty;
+  $("#minus").disabled = inquiry || qty <= 1;
 }
 $("#plus").onclick = () => { if (qty < CONFIG.maxQty) { qty++; render(); } };
 $("#minus").onclick = () => { if (qty > 1) { qty--; render(); } };
@@ -373,7 +379,7 @@ render();
 
 $("#shareBtn").onclick = async () => {
   const url = location.href, lbl = $("#shareLabel");
-  const payload = { title: "ALL in MIX", text: "NEW PLAYER 003 presents ALL in MIX · 11.28 (토) 성수율", url };
+  const payload = { title: CONFIG.event.title, text: "NEW PLAYER 003 presents " + CONFIG.event.title + " · " + CONFIG.event.date + " " + CONFIG.event.venue, url };
   try {
     if (navigator.share) { await navigator.share(payload); return; }
     await navigator.clipboard.writeText(url); lbl.textContent = "link copied";
@@ -386,7 +392,7 @@ $("#shareBtn").onclick = async () => {
 
 $("#copyBtn").onclick = async () => {
   const b = $("#copyBtn");
-  try { await navigator.clipboard.writeText(CONFIG.accountNumber); b.textContent = "COPIED"; }
+  try { await navigator.clipboard.writeText(CONFIG.account.number); b.textContent = "COPIED"; }
   catch (e) { const r = document.createRange(); r.selectNodeContents($("#acctNum")); getSelection().removeAllRanges(); getSelection().addRange(r); b.textContent = "SELECT"; }
   setTimeout(() => b.textContent = "COPY", 1600);
 };
@@ -405,15 +411,19 @@ $("#form").addEventListener("submit", async e => {
   for (const el of form.querySelectorAll("[required]")) {
     if (!el.checkValidity()) { el.closest(".field, .consent")?.classList.add("invalid"); if (!bad) bad = el; }
   }
-  if (bad) { msg.textContent = "필수 항목을 확인해 주세요."; msg.classList.add("err"); bad.focus(); return; }
+  if (!ticket()) { bad = bad || $("#seg"); $("#seg").closest(".field").classList.add("invalid"); }
+  if (bad) { msg.textContent = "필수 항목을 확인해 주세요."; msg.classList.add("err"); bad.focus?.(); return; }
 
+  const t = ticket();
   const data = {
     timestamp: new Date().toISOString(),
     name: $("#name").value.trim(),
     phone: $("#phone").value.trim(),
-    ticket: form.ticket.value,
-    qty: qty,
-    amount: unit() * qty,
+    affiliation: $("#affiliation").value,
+    inviter: $("#inviter").value.trim(),
+    ticket: t.label,
+    qty: t.price === null ? 0 : qty,
+    amount: t.price === null ? 0 : t.price * qty,
     depositor: $("#depositor").value.trim(),
     bank: $("#bank").value,
     arrival: $("#arrival").value,
@@ -425,6 +435,7 @@ $("#form").addEventListener("submit", async e => {
     if (CONFIG.endpoint) {
       await fetch(CONFIG.endpoint, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(data) });
     } else { await new Promise(r => setTimeout(r, 700)); }
+    if (t.price === null) $("#doneText").innerHTML = "테이블 문의가 접수되었습니다.<br>가격과 예약 안내를 연락드릴게요.";
     $("#doneNum").textContent = "NO. " + Date.now().toString(36).toUpperCase().slice(-6);
     $("#ticket").classList.add("ok");
     $("#ticket").scrollIntoView({ behavior: "smooth", block: "start" });
