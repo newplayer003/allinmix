@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ALL in MIX 신청</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+/* Layout: one dark column. Hero = rotating red corona around a black disc in smoke; UNDEFINED glitches above it; the form sits below as a ticket stub. */
+:root{
+  --bg:#050505;
+  --bg-2:#0d0b0b;
+  --line:#272121;
+  --fg:#efe8e6;
+  --fg-2:#9d9290;
+  --smoke:#5c5557;
+  --red:#d80f26;
+  --red-2:#ff2438;
+  --red-dim:#5a0b14;
+  --err:#ff6a6a;
+  --en:"Poppins",-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --kr:"Pretendard",-apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--kr);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 72px}
+.en{font-family:var(--en)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;text-align:center;padding-block:48px 8px;isolation:isolate}
+.eyebrow{font-family:var(--en);font-weight:500;font-size:11px;letter-spacing:.36em;color:var(--fg-2);text-transform:uppercase;margin:0 0 10px}
+
+.undefined{font-family:var(--en);font-weight:700;font-size:clamp(34px,10vw,64px);letter-spacing:.18em;line-height:1;margin:0;
+  position:relative;z-index:2;color:transparent;-webkit-text-stroke:1px var(--fg);text-stroke:1px var(--fg);
+  transform:translateY(38%);mix-blend-mode:screen;user-select:none}
+.undefined::before,.undefined::after{content:attr(data-t);position:absolute;inset:0;-webkit-text-stroke:0;pointer-events:none}
+.undefined::before{color:var(--red-2);clip-path:inset(0 0 0 0);animation:glitchA 4.6s steps(1) infinite;opacity:.85}
+.undefined::after{color:#8ff;clip-path:inset(0 0 0 0);animation:glitchB 5.1s steps(1) infinite -2s;opacity:.55}
+@keyframes glitchA{0%,91%,100%{clip-path:inset(100% 0 0 0);transform:none}92%{clip-path:inset(12% 0 68% 0);transform:translate(-6px,0)}94%{clip-path:inset(62% 0 10% 0);transform:translate(5px,0)}96%{clip-path:inset(30% 0 40% 0);transform:translate(-3px,0)}98%{clip-path:inset(100% 0 0 0)}}
+@keyframes glitchB{0%,88%,100%{clip-path:inset(100% 0 0 0);transform:none}89%{clip-path:inset(45% 0 30% 0);transform:translate(6px,0)}92%{clip-path:inset(5% 0 80% 0);transform:translate(-5px,0)}95%{clip-path:inset(70% 0 5% 0);transform:translate(3px,0)}97%{clip-path:inset(100% 0 0 0)}}
+
+.sky{position:relative;width:min(300px,68vw);max-width:100%;aspect-ratio:1;margin:0 auto 30px}
+.smoke{position:absolute;inset:-40%;z-index:-1;pointer-events:none}
+.smoke i{position:absolute;border-radius:50%;filter:blur(38px);opacity:.55;background:var(--smoke);mix-blend-mode:screen}
+.smoke i:nth-child(1){width:60%;height:38%;left:10%;top:42%;animation:drift 26s ease-in-out infinite alternate}
+.smoke i:nth-child(2){width:48%;height:30%;left:42%;top:30%;opacity:.4;animation:drift 34s ease-in-out -9s infinite alternate-reverse}
+.smoke i:nth-child(3){width:42%;height:26%;left:26%;top:60%;opacity:.35;background:var(--red-dim);animation:drift 30s ease-in-out -17s infinite alternate}
+@keyframes drift{from{transform:translate(-6%,2%) scale(1)}to{transform:translate(8%,-5%) scale(1.15)}}
+
+/* the sun: an uneven corona that rotates a full turn */
+.sun{position:absolute;inset:-6%;border-radius:50%;animation:spin 28s linear infinite;
+  background:conic-gradient(from 0deg,
+    rgba(216,15,38,.0) 0deg, rgba(255,36,56,.85) 18deg, rgba(216,15,38,.15) 40deg,
+    rgba(255,50,60,.7) 95deg, rgba(216,15,38,.05) 130deg,
+    rgba(255,36,56,.6) 170deg, rgba(216,15,38,.1) 200deg,
+    rgba(255,40,70,.9) 250deg, rgba(216,15,38,.08) 290deg,
+    rgba(255,36,56,.55) 330deg, rgba(216,15,38,.0) 360deg);
+  -webkit-mask:radial-gradient(circle,transparent 42%,#000 47%,#000 62%,transparent 76%);mask:radial-gradient(circle,transparent 42%,#000 47%,#000 62%,transparent 76%);
+  filter:blur(6px)}
+.sun.b{inset:-14%;filter:blur(26px);opacity:.7;animation-duration:40s;animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.corona{position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle, rgba(255,36,56,0) 46%, rgba(255,36,56,.95) 49%, rgba(216,15,38,.5) 54%, rgba(216,15,38,.12) 66%, rgba(216,15,38,0) 76%);
+  filter:blur(1.2px);animation:breathe 7s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:.95}50%{transform:scale(1.04);opacity:.8}}
+.disc{position:absolute;inset:4%;border-radius:50%;background:#000;box-shadow:0 0 0 1px rgba(255,255,255,.04),inset -14px -10px 40px rgba(255,30,50,.08),inset 0 0 60px #000}
+.flare{position:absolute;width:10px;height:10px;left:50%;top:50%;margin:-5px;border-radius:50%;background:#fff;box-shadow:0 0 14px 4px #fff,0 0 40px 12px var(--red-2);
+  animation:orbit 28s linear infinite}
+@keyframes orbit{from{transform:rotate(0deg) translate(0,-50cqw) rotate(0deg)}to{transform:rotate(360deg) translate(0,-50cqw) rotate(-360deg)}}
+.sky{container-type:inline-size}
+.main-image{display:none;position:absolute;inset:4%;border-radius:50%;object-fit:cover;width:92%;height:92%}
+.sky.has-image .disc{display:none}.sky.has-image .main-image{display:block}
+
+h1{font-family:var(--en);font-weight:700;font-size:clamp(40px,10.5vw,68px);line-height:.95;letter-spacing:.04em;margin:0;text-wrap:balance}
+h1 em{font-style:italic;font-weight:300;color:var(--red-2);letter-spacing:0}
+.sub{font-size:15px;color:var(--fg-2);margin:14px 0 0}
+.meta{display:grid;gap:6px;margin:26px auto 0;font-family:var(--en);font-size:12px;letter-spacing:.1em;color:var(--fg-2);text-transform:uppercase}
+.meta b{color:var(--fg);font-weight:500;font-family:var(--kr);letter-spacing:.02em;text-transform:none}
+.share{max-width:420px;margin:12px auto 0}
+.share-btn{display:block;width:100%;background:transparent;border:1px solid var(--red-2);color:var(--red-2);cursor:pointer;
+  font:italic 300 18px var(--en);letter-spacing:.12em;padding:11px 18px;transition:all .2s}
+.share-btn:hover{background:var(--red-2);color:#fff}
+.maps{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px 0 0}
+.maps a{font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--fg);text-decoration:none;border:1px solid var(--line);padding:7px 14px;transition:border-color .2s,color .2s}
+.maps a:hover{border-color:var(--red-2);color:var(--red-2)}
+
+/* price list */
+.info{margin-top:40px;text-align:left}
+.info h2{font-weight:600;font-size:18px;margin:0 0 6px;letter-spacing:-.01em}
+.info .inc{font-size:13px;color:var(--fg-2);margin:0 0 14px}
+.prices{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.prices div{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:14px 4px;border-bottom:1px solid var(--line);align-items:baseline}
+.prices div:last-child{border-bottom:0}
+.prices .t{font-weight:500}
+.prices .p{font-family:var(--en);font-weight:500;font-size:16px;color:var(--red-2);font-variant-numeric:tabular-nums}
+.prices .note{grid-column:1/-1;font-size:12px;color:var(--fg-2)}
+.prices .tag{font-family:var(--en);font-size:10px;letter-spacing:.16em;color:var(--red-2);margin-left:8px;vertical-align:middle}
+
+/* ---------- ticket / form ---------- */
+.ticket{background:var(--bg-2);border:1px solid var(--line);position:relative;margin-top:36px}
+.ticket::before,.ticket::after{content:"";position:absolute;top:118px;width:22px;height:22px;border-radius:50%;background:var(--bg);border:1px solid var(--line)}
+.ticket::before{left:-12px}.ticket::after{right:-12px}
+.ticket-head{padding:26px 28px 22px;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.ticket-head h2{font-weight:600;font-size:21px;margin:0;letter-spacing:-.01em}
+.ticket-head small{font-family:var(--en);font-size:11px;letter-spacing:.24em;color:var(--fg-2)}
+form{padding:8px 28px 28px;display:grid}
+.field{padding:20px 0;border-bottom:1px solid var(--line);display:grid;gap:10px}
+.field:last-of-type{border-bottom:0}
+.lab{font-size:13px;font-weight:500;letter-spacing:.02em;color:var(--fg);display:flex;gap:8px;align-items:baseline}
+.lab .n{font-family:var(--en);font-size:10px;color:var(--red-2);letter-spacing:.14em}
+.lab .req{color:var(--red-2);font-size:12px}
+.hint{font-size:12px;color:var(--fg-2);margin:0}
+input[type=text],input[type=tel],select{width:100%;background:transparent;border:0;border-bottom:1px solid var(--smoke);border-radius:0;color:var(--fg);
+  font:inherit;font-size:17px;padding:8px 0;outline:none;transition:border-color .2s;appearance:none;-webkit-appearance:none}
+input::placeholder{color:#4a4345}
+input:focus,select:focus{border-bottom-color:var(--red-2)}
+input:focus-visible,select:focus-visible,button:focus-visible,.seg label:focus-within{outline:2px solid var(--red-2);outline-offset:4px}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--fg-2) 50%),linear-gradient(135deg,var(--fg-2) 50%,transparent 50%);
+  background-position:calc(100% - 14px) 50%,calc(100% - 9px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:28px;cursor:pointer}
+select option{background:var(--bg-2)}
+select:invalid{color:#4a4345}
+
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.seg input{position:absolute;opacity:0;width:0;height:0}
+.seg label{cursor:pointer;border:1px solid var(--line);padding:14px 16px;display:grid;gap:4px;transition:border-color .2s,background .2s;position:relative}
+.seg label strong{font-weight:500;font-size:15px;display:flex;gap:8px;align-items:center}
+.seg label span.p{font-family:var(--en);font-size:13px;color:var(--fg-2);letter-spacing:.02em}
+.seg label span.tag{font-family:var(--en);font-size:10px;letter-spacing:.16em;color:var(--red-2)}
+.seg input:checked+label{border-color:var(--red-2);background:linear-gradient(180deg,rgba(216,15,38,.12),rgba(216,15,38,.02))}
+.seg input:checked+label::after{content:"";position:absolute;right:12px;top:12px;width:8px;height:8px;border-radius:50%;background:var(--red-2);box-shadow:0 0 10px var(--red-2)}
+.seg label.off{opacity:.45;cursor:not-allowed}
+
+.qty{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.step{display:inline-grid;grid-template-columns:44px 64px 44px;border:1px solid var(--line)}
+.step button{background:transparent;border:0;color:var(--fg);font-size:20px;cursor:pointer;height:44px;font-family:var(--en)}
+.step button:hover{color:var(--red-2)}
+.step output{display:grid;place-items:center;font-family:var(--en);font-size:16px;border-left:1px solid var(--line);border-right:1px solid var(--line);font-variant-numeric:tabular-nums}
+.amount{font-family:var(--en);font-size:13px;color:var(--fg-2);letter-spacing:.04em}
+.amount b{display:block;font-size:22px;font-weight:600;color:var(--red-2);font-variant-numeric:tabular-nums;line-height:1.2}
+
+.acct{border:1px solid var(--line);padding:14px 16px;display:grid;gap:6px;background:#080707}
+.acct .row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.acct .num{font-family:var(--en);font-weight:500;font-size:16px;letter-spacing:.06em;user-select:all}
+.acct .bank{font-size:13px;color:var(--fg-2)}
+.copy{font:500 11px/1 var(--en);letter-spacing:.16em;color:var(--fg);background:transparent;border:1px solid var(--smoke);padding:8px 12px;cursor:pointer;transition:all .2s}
+.copy:hover{border-color:var(--red-2);color:var(--red-2)}
+
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--fg-2);padding:18px 0 6px}
+.consent input{accent-color:var(--red);margin-top:3px;width:15px;height:15px;flex:none}
+.submit{margin-top:14px;width:100%;height:58px;border:0;cursor:pointer;color:#fff;font:600 14px var(--en);letter-spacing:.26em;
+  background:linear-gradient(90deg,var(--red-dim),var(--red) 50%,var(--red-dim));background-size:200% 100%;background-position:0 0;
+  transition:background-position .6s,transform .15s,opacity .2s}
+.submit:hover{background-position:100% 0}
+.submit:active{transform:scale(.99)}
+.submit[disabled]{opacity:.55;cursor:wait}
+.msg{margin:14px 0 0;font-size:13px;min-height:1.2em}
+.msg.err{color:var(--err)}
+.field.invalid input,.field.invalid select{border-bottom-color:var(--err)}
+
+.done{display:none;padding:48px 28px;text-align:center}
+.done .ring{width:84px;height:84px;border-radius:50%;margin:0 auto 22px;background:#000;box-shadow:0 0 0 2px var(--red-2),0 0 30px 6px rgba(216,15,38,.5)}
+.done h3{font-family:var(--en);font-weight:600;font-size:30px;letter-spacing:.14em;margin:0 0 8px}
+.done p{color:var(--fg-2);font-size:14px;margin:0 0 22px}
+.done .num{font-family:var(--en);font-size:12px;letter-spacing:.2em;color:var(--red-2)}
+.ticket.ok form,.ticket.ok .ticket-head{display:none}
+.ticket.ok .done{display:block}
+
+footer{margin-top:36px;text-align:center;font-family:var(--en);font-size:11px;letter-spacing:.24em;color:#4a4345}
+.demo{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:5;
+  font:500 10px/1 var(--en);letter-spacing:.22em;color:var(--fg-2);background:rgba(13,11,11,.9);border:1px solid var(--line);padding:8px 12px;display:none;white-space:nowrap}
+.demo.on{display:block}
+@media (max-width:480px){form,.ticket-head{padding-left:18px;padding-right:18px}.done{padding:40px 18px}.ticket::before,.ticket::after{display:none}}
+@media (prefers-reduced-motion:reduce){.smoke i,.corona,.sun,.flare,.undefined::before,.undefined::after{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="hero">
+    <p class="eyebrow">New Player 003 presents</p>
+    <p class="undefined" data-t="UNDEFINED" aria-hidden="true">UNDEFINED</p>
+    <div class="sky" id="sky">
+      <div class="smoke" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="sun b" aria-hidden="true"></div>
+      <div class="sun" aria-hidden="true"></div>
+      <div class="corona" aria-hidden="true"></div>
+      <div class="disc" aria-hidden="true"></div>
+      <div class="flare" aria-hidden="true"></div>
+      <img class="main-image" id="mainImage" alt="" src="">
+    </div>
+    <h1>ALL <em>in</em> MIX</h1>
+    <div class="meta">
+      <span>Schedule <b>2026년 11월 28일 (토) 오후 6시 – 12시</b></span>
+      <span>Venue <b>성수율 · 서울특별시 성동구 성수이로16길 31</b></span>
+    </div>
+    <div class="maps">
+      <a href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%98%EC%9D%B4%EB%A1%9C16%EA%B8%B8%2031" target="_blank" rel="noopener">네이버 지도</a>
+      <a href="https://map.kakao.com/?q=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%98%EC%9D%B4%EB%A1%9C16%EA%B8%B8%2031" target="_blank" rel="noopener">카카오맵</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%98%EC%9D%B4%EB%A1%9C16%EA%B8%B8%2031" target="_blank" rel="noopener">구글맵</a>
+    </div>
+    <div class="share">
+      <button type="button" id="shareBtn" class="share-btn"><span id="shareLabel">share</span></button>
+    </div>
+
+  </section>
+
+  <section class="ticket" id="ticket">
+    <div class="ticket-head">
+      <h2>이벤트 신청</h2>
+      <small>ADMIT ONE</small>
+    </div>
+
+    <form id="form" novalidate>
+      <div class="field">
+        <label class="lab" for="name"><span class="n">01</span>이름 <span class="req">*</span></label>
+        <input type="text" id="name" name="name" placeholder="홍길동" autocomplete="name" required>
+      </div>
+
+      <div class="field">
+        <label class="lab" for="phone"><span class="n">02</span>연락처 <span class="req">*</span></label>
+        <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" autocomplete="tel" inputmode="tel" required>
+        <p class="hint">입금 확인 및 안내 문자 발송에 사용됩니다.</p>
+      </div>
+
+      <div class="field">
+        <div class="lab"><span class="n">03</span>티켓 구분 <span class="req">*</span></div>
+        <div class="seg" role="radiogroup" aria-label="티켓 구분">
+          <input type="radio" id="t-early" name="ticket" value="얼리버드" checked>
+          <label for="t-early" id="l-early"><strong>얼리버드 <span class="tag" id="earlyTag2">EARLY</span></strong><span class="p" id="earlyPrice"></span></label>
+          <input type="radio" id="t-regular" name="ticket" value="일반">
+          <label for="t-regular"><strong>일반</strong><span class="p" id="regularPrice"></span></label>
+        </div>
+        <p class="hint" id="refundHint"></p>
+      </div>
+
+      <div class="field">
+        <div class="lab"><span class="n">04</span>티켓 구매 수 <span class="req">*</span></div>
+        <div class="qty">
+          <div class="step" role="group" aria-label="티켓 구매 수">
+            <button type="button" id="minus" aria-label="줄이기">−</button>
+            <output id="qtyOut" for="qty">1</output>
+            <button type="button" id="plus" aria-label="늘리기">+</button>
+          </div>
+          <div class="amount">입금 금액<b id="totalPrice"></b></div>
+        </div>
+        <input type="hidden" id="qty" name="qty" value="1">
+      </div>
+
+      <div class="field">
+        <div class="lab"><span class="n">05</span>입금자명 <span class="req">*</span></div>
+        <div class="acct">
+          <div class="row">
+            <span class="num" id="acctNum"></span>
+            <button type="button" class="copy" id="copyBtn">COPY</button>
+          </div>
+          <span class="bank" id="acctBank"></span>
+        </div>
+        <input type="text" id="depositor" name="depositor" placeholder="실제 입금하는 분의 이름" required>
+        <p class="hint">신청 후 24시간 내 위 계좌로 입금해 주세요. 입금 확인 후 신청이 확정됩니다.</p>
+      </div>
+
+      <div class="field">
+        <label class="lab" for="bank"><span class="n">06</span>입금 은행 <span class="req">*</span></label>
+        <select id="bank" name="bank" required>
+          <option value="" disabled selected>입금하실 은행을 선택하세요</option>
+          <option>카카오뱅크</option><option>토스뱅크</option><option>케이뱅크</option>
+          <option>국민은행</option><option>신한은행</option><option>우리은행</option><option>하나은행</option>
+          <option>농협은행</option><option>기업은행</option><option>SC제일은행</option><option>씨티은행</option>
+          <option>새마을금고</option><option>우체국</option><option>수협</option><option>신협</option>
+          <option>대구은행(iM뱅크)</option><option>부산은행</option><option>경남은행</option><option>광주은행</option><option>전북은행</option><option>제주은행</option>
+          <option>기타</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="lab" for="arrival"><span class="n">07</span>예상 도착 시간 <span class="req">*</span></label>
+        <select id="arrival" name="arrival" required>
+          <option value="" disabled selected>오후 6시 – 12시 사이에서 선택</option>
+        </select>
+      </div>
+
+      <label class="consent"><input type="checkbox" id="agree" required>
+        <span>입력한 정보는 이벤트 운영(입금 확인, 안내 연락)에만 사용되며 행사 종료 후 파기됩니다. 동의합니다.</span></label>
+
+      <button class="submit" type="submit" id="submitBtn">SUBMIT</button>
+      <p class="msg" id="msg" aria-live="polite"></p>
+    </form>
+
+    <div class="done" id="done">
+      <div class="ring"></div>
+      <h3>ADMITTED</h3>
+      <p>신청이 접수되었습니다.<br>입금 확인 후 안내 문자를 드릴게요.</p>
+      <span class="num" id="doneNum"></span>
+    </div>
+  </section>
+
+  <section class="info">
+    <h2>티켓 안내</h2>
+    <p class="inc">모든 티켓에 프리드링크 1잔이 포함됩니다.</p>
+    <div class="prices">
+      <div><span class="t">얼리버드 티켓<span class="tag" id="earlyTag">EARLY</span></span><span class="p" id="pEarly"></span><span class="note">환불 불가</span></div>
+      <div><span class="t">일반 티켓</span><span class="p" id="pRegular"></span><span class="note">11월 25일 (수) 자정까지 환불 가능 · 별도 문의</span></div>
+      <div><span class="t">테이블</span><span class="p">별도 문의</span><span class="note">11월 21일 (토) 자정까지 환불 가능 · 별도 문의</span></div>
+    </div>
+  </section>
+
+  <footer>ALL IN MIX · NEW PLAYER 003</footer>
+</div>
+<div class="demo" id="demo">DEMO MODE · 시트 연결 전</div>
+
+<script>
+/* ===================== 설정 (여기만 수정하세요) ===================== */
+const CONFIG = {
+  endpoint: "",                           // Google Apps Script 웹앱 URL (배포 후 붙여넣기)
+  earlyPrice: 15000,
+  regularPrice: 20000,
+  earlyDeadline: "",                      // 예: "2026-11-15" (이 날짜가 지나면 얼리버드 선택 불가)
+  bank: "카카오뱅크",                       // 입금받을 계좌
+  accountNumber: "3333-00-0000000",
+  accountHolder: "DJ크루",
+  maxQty: 10,
+  mainImage: ""                           // 메인 이미지 URL (있으면 일식 디스크 대신 표시)
+};
+/* =================================================================== */
+
+const $ = s => document.querySelector(s);
+const won = n => n.toLocaleString("ko-KR") + "원";
+
+if (CONFIG.mainImage) { $("#mainImage").src = CONFIG.mainImage; $("#sky").classList.add("has-image"); }
+if (!CONFIG.endpoint) $("#demo").classList.add("on");
+
+$("#pEarly").textContent = won(CONFIG.earlyPrice);
+$("#pRegular").textContent = won(CONFIG.regularPrice);
+$("#earlyPrice").textContent = won(CONFIG.earlyPrice) + " · 환불 불가";
+$("#regularPrice").textContent = won(CONFIG.regularPrice);
+$("#acctNum").textContent = CONFIG.accountNumber;
+$("#acctBank").textContent = CONFIG.bank + " · 예금주 " + CONFIG.accountHolder;
+if (CONFIG.earlyDeadline) {
+  const t = "~" + CONFIG.earlyDeadline.replace(/-/g,".").slice(5);
+  $("#earlyTag").textContent = t; $("#earlyTag2").textContent = t;
+  if (new Date() > new Date(CONFIG.earlyDeadline + "T23:59:59")) {
+    $("#t-early").disabled = true; $("#t-early").checked = false; $("#t-regular").checked = true;
+    $("#l-early").classList.add("off"); $("#earlyTag").textContent = $("#earlyTag2").textContent = "CLOSED";
+  }
+}
+
+// arrival slots 18:00 – 24:00, 30 min
+const arr = $("#arrival");
+for (let m = 18*60; m <= 24*60; m += 30) {
+  const h = Math.floor(m/60), mm = m%60;
+  const label = (h === 24 ? "자정 12:00" : "오후 " + (h-12) + ":" + String(mm).padStart(2,"0"));
+  const o = document.createElement("option"); o.value = String(h).padStart(2,"0")+":"+String(mm).padStart(2,"0"); o.textContent = label; arr.appendChild(o);
+}
+
+// quantity + amount
+let qty = 1;
+const unit = () => $("#t-early").checked ? CONFIG.earlyPrice : CONFIG.regularPrice;
+function render(){
+  $("#qtyOut").value = qty; $("#qty").value = qty;
+  $("#totalPrice").textContent = won(unit() * qty);
+  $("#refundHint").textContent = $("#t-early").checked ? "얼리버드 티켓은 환불이 불가합니다." : "일반 티켓은 11월 25일 (수) 자정까지 환불 가능 (별도 문의).";
+}
+$("#plus").onclick = () => { if (qty < CONFIG.maxQty) { qty++; render(); } };
+$("#minus").onclick = () => { if (qty > 1) { qty--; render(); } };
+document.querySelectorAll("input[name=ticket]").forEach(r => r.addEventListener("change", render));
+render();
+
+$("#shareBtn").onclick = async () => {
+  const url = location.href, lbl = $("#shareLabel");
+  const payload = { title: "ALL in MIX", text: "NEW PLAYER 003 presents ALL in MIX · 11.28 (토) 성수율", url };
+  try {
+    if (navigator.share) { await navigator.share(payload); return; }
+    await navigator.clipboard.writeText(url); lbl.textContent = "link copied";
+  } catch (e) {
+    if (e && e.name === "AbortError") return;
+    try { await navigator.clipboard.writeText(url); lbl.textContent = "link copied"; } catch (_) { lbl.textContent = url; }
+  }
+  setTimeout(() => lbl.textContent = "share", 1800);
+};
+
+$("#copyBtn").onclick = async () => {
+  const b = $("#copyBtn");
+  try { await navigator.clipboard.writeText(CONFIG.accountNumber); b.textContent = "COPIED"; }
+  catch (e) { const r = document.createRange(); r.selectNodeContents($("#acctNum")); getSelection().removeAllRanges(); getSelection().addRange(r); b.textContent = "SELECT"; }
+  setTimeout(() => b.textContent = "COPY", 1600);
+};
+
+$("#phone").addEventListener("input", e => {
+  const d = e.target.value.replace(/\D/g, "").slice(0, 11);
+  e.target.value = d.length > 7 ? d.replace(/(\d{3})(\d{4})(\d+)/, "$1-$2-$3") : d.length > 3 ? d.replace(/(\d{3})(\d+)/, "$1-$2") : d;
+});
+
+$("#form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const form = e.target, msg = $("#msg"), btn = $("#submitBtn");
+  msg.textContent = ""; msg.classList.remove("err");
+  document.querySelectorAll(".field").forEach(f => f.classList.remove("invalid"));
+  let bad = null;
+  for (const el of form.querySelectorAll("[required]")) {
+    if (!el.checkValidity()) { el.closest(".field, .consent")?.classList.add("invalid"); if (!bad) bad = el; }
+  }
+  if (bad) { msg.textContent = "필수 항목을 확인해 주세요."; msg.classList.add("err"); bad.focus(); return; }
+
+  const data = {
+    timestamp: new Date().toISOString(),
+    name: $("#name").value.trim(),
+    phone: $("#phone").value.trim(),
+    ticket: form.ticket.value,
+    qty: qty,
+    amount: unit() * qty,
+    depositor: $("#depositor").value.trim(),
+    bank: $("#bank").value,
+    arrival: $("#arrival").value,
+    userAgent: navigator.userAgent
+  };
+
+  btn.disabled = true; btn.textContent = "SENDING…";
+  try {
+    if (CONFIG.endpoint) {
+      await fetch(CONFIG.endpoint, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(data) });
+    } else { await new Promise(r => setTimeout(r, 700)); }
+    $("#doneNum").textContent = "NO. " + Date.now().toString(36).toUpperCase().slice(-6);
+    $("#ticket").classList.add("ok");
+    $("#ticket").scrollIntoView({ behavior: "smooth", block: "start" });
+  } catch (err) {
+    msg.textContent = "전송에 실패했습니다. 잠시 후 다시 시도해 주세요."; msg.classList.add("err");
+    btn.disabled = false; btn.textContent = "SUBMIT";
+  }
+});
+</script>
+</body>
+</html>
