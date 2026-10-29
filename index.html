@@ -261,9 +261,9 @@ footer{margin-top:36px;text-align:center;font-family:var(--en);font-size:11px;le
       </div>
 
       <div class="field">
-        <label class="lab" for="bank"><span class="n">08</span>입금 은행 <span class="req">*</span></label>
+        <label class="lab" for="bank"><span class="n">08</span>입금자 은행 <span class="req">*</span></label>
         <select id="bank" name="bank" required>
-          <option value="" disabled selected>입금하실 은행을 선택하세요</option>
+          <option value="" disabled selected>입금하시는 분의 은행을 선택하세요</option>
         </select>
       </div>
 
@@ -333,7 +333,7 @@ const CONFIG = {
   columns: [
     ["접수번호", "receipt"], ["접수일시", "timestamp"], ["이름", "name"], ["연락처", "phone"],
     ["소속", "affiliation"], ["초대자명", "inviter"], ["티켓 구분", "ticket"], ["구매 수", "qty"],
-    ["입금 금액", "amount"], ["입금자명", "depositor"], ["입금 은행", "bank"], ["예상 도착", "arrival"],
+    ["입금 금액", "amount"], ["입금자명", "depositor"], ["입금자 은행", "bank"], ["예상 도착", "arrival"],
     ["촬영 동의", "photoConsent"], ["입금 확인", "__checkbox"], ["비고", "__blank"], ["기기", "userAgent"]
   ]
 };
@@ -471,8 +471,12 @@ $("#form").addEventListener("submit", async e => {
   btn.disabled = true; btn.textContent = "SENDING…";
   try {
     if (CONFIG.endpoint) {
-      await fetch(CONFIG.endpoint, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ columns: CONFIG.columns, data }) });
-    } else { await new Promise(r => setTimeout(r, 700)); }
+      // 응답을 기다리지 않고 전송만 보장 (keepalive). Apps Script 응답이 느려도 화면은 바로 넘어갑니다.
+      // 구/신 스크립트 모두 읽을 수 있게 평평한 필드 + columns/data 를 함께 보냅니다.
+      const body = JSON.stringify({ ...data, columns: CONFIG.columns, data });
+      const sent = fetch(CONFIG.endpoint, { method: "POST", mode: "no-cors", keepalive: true, headers: { "Content-Type": "text/plain;charset=utf-8" }, body });
+      await Promise.race([sent, new Promise(r => setTimeout(r, 600))]);
+    } else { await new Promise(r => setTimeout(r, 500)); }
     if (t.price === null) $("#doneText").innerHTML = "테이블 문의가 접수되었습니다.<br>가격과 예약 안내를 연락드릴게요.";
     $("#doneNum").textContent = "NO. " + receipt;
     $("#ticket").classList.add("ok");
