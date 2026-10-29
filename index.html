@@ -6,6 +6,10 @@
 <title>ALL in MIX 신청</title>
 <meta property="og:title" content="ALL in MIX">
 <meta property="og:description" content="NEW PLAYER 003 presents ALL in MIX · 2026.11.28 (토) 성수율">
+<meta property="og:image" content="https://linzi-gm.github.io/newplayer003/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
@@ -136,7 +140,8 @@ select:invalid{color:#4a4345}
 .copy{font:500 11px/1 var(--en);letter-spacing:.16em;color:var(--fg);background:transparent;border:1px solid var(--smoke);padding:8px 12px;cursor:pointer;transition:all .2s}
 .copy:hover{border-color:var(--red-2);color:var(--red-2)}
 
-.consent{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--fg-2);padding:18px 0 6px}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--fg-2);padding:14px 0 0}
+.consent+.consent{padding-top:10px}
 .consent input{accent-color:var(--red);margin-top:3px;width:15px;height:15px;flex:none}
 .submit{margin-top:14px;width:100%;height:58px;border:0;cursor:pointer;color:#fff;font:600 14px var(--en);letter-spacing:.26em;
   background:linear-gradient(90deg,var(--red-dim),var(--red) 50%,var(--red-dim));background-size:200% 100%;background-position:0 0;
@@ -152,7 +157,10 @@ select:invalid{color:#4a4345}
 .done .ring{width:84px;height:84px;border-radius:50%;margin:0 auto 22px;background:#000;box-shadow:0 0 0 2px var(--red-2),0 0 30px 6px rgba(216,15,38,.5)}
 .done h3{font-family:var(--en);font-weight:600;font-size:30px;letter-spacing:.14em;margin:0 0 8px}
 .done p{color:var(--fg-2);font-size:14px;margin:0 0 22px}
-.done .num{font-family:var(--en);font-size:12px;letter-spacing:.2em;color:var(--red-2)}
+.done .num{font-family:var(--en);font-size:14px;letter-spacing:.2em;color:var(--red-2);font-weight:500}
+.done-actions{margin-top:26px}
+.again{width:100%;max-width:320px;height:50px;background:transparent;border:1px solid var(--fg);color:var(--fg);cursor:pointer;font:500 14px var(--kr);letter-spacing:.04em;transition:all .2s}
+.again:hover{border-color:var(--red-2);color:var(--red-2)}
 .ticket.ok form,.ticket.ok .ticket-head{display:none}
 .ticket.ok .done{display:block}
 
@@ -268,6 +276,8 @@ footer{margin-top:36px;text-align:center;font-family:var(--en);font-size:11px;le
 
       <label class="consent"><input type="checkbox" id="agree" required>
         <span>입력한 정보는 이벤트 운영(입금 확인, 안내 연락)에만 사용되며 행사 종료 후 파기됩니다. 동의합니다.</span></label>
+      <label class="consent"><input type="checkbox" id="agreePhoto" required>
+        <span>행사 현장은 사진·영상으로 촬영되며, 촬영물이 NEW PLAYER 003의 홍보 콘텐츠(SNS 등)에 활용될 수 있습니다. 초상권 활용에 동의합니다.</span></label>
 
       <button class="submit" type="submit" id="submitBtn">SUBMIT</button>
       <p class="msg" id="msg" aria-live="polite"></p>
@@ -278,6 +288,10 @@ footer{margin-top:36px;text-align:center;font-family:var(--en);font-size:11px;le
       <h3>ADMITTED</h3>
       <p id="doneText">신청이 접수되었습니다.<br>입금 확인 후 안내 문자를 드릴게요.</p>
       <span class="num" id="doneNum"></span>
+      <p class="hint" style="margin-top:8px">접수번호는 문의 시 알려주세요.</p>
+      <div class="done-actions">
+        <button type="button" class="again" id="againBtn">추가 신청하기</button>
+      </div>
     </div>
   </section>
 
@@ -313,7 +327,15 @@ const CONFIG = {
 
   account: { bank: "카카오뱅크", number: "79422146646", holder: "김명환" },
 
-  mainImage: ""   // 메인 이미지 URL (있으면 일식 디스크 대신 표시)
+  mainImage: "",  // 메인 이미지 URL (있으면 일식 디스크 대신 표시)
+
+  // 구글 시트 열 순서. [시트 헤더, 전송 키]. 항목을 추가하면 여기만 맞춰주면 시트도 따라옵니다.
+  columns: [
+    ["접수번호", "receipt"], ["접수일시", "timestamp"], ["이름", "name"], ["연락처", "phone"],
+    ["소속", "affiliation"], ["초대자명", "inviter"], ["티켓 구분", "ticket"], ["구매 수", "qty"],
+    ["입금 금액", "amount"], ["입금자명", "depositor"], ["입금 은행", "bank"], ["예상 도착", "arrival"],
+    ["촬영 동의", "photoConsent"], ["입금 확인", "__checkbox"], ["비고", "__blank"], ["기기", "userAgent"]
+  ]
 };
 /* =================================================================== */
 
@@ -390,6 +412,18 @@ $("#shareBtn").onclick = async () => {
   setTimeout(() => lbl.textContent = "share", 1800);
 };
 
+$("#againBtn").onclick = () => {
+  const form = $("#form");
+  form.reset(); qty = 1;
+  if (firstOpen) $("#t-" + firstOpen.id).checked = true;
+  render();
+  $("#doneText").innerHTML = "신청이 접수되었습니다.<br>입금 확인 후 안내 문자를 드릴게요.";
+  $("#submitBtn").disabled = false; $("#submitBtn").textContent = "SUBMIT";
+  $("#msg").textContent = "";
+  $("#ticket").classList.remove("ok");
+  $("#ticket").scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
 $("#copyBtn").onclick = async () => {
   const b = $("#copyBtn");
   try { await navigator.clipboard.writeText(CONFIG.account.number); b.textContent = "COPIED"; }
@@ -415,8 +449,11 @@ $("#form").addEventListener("submit", async e => {
   if (bad) { msg.textContent = "필수 항목을 확인해 주세요."; msg.classList.add("err"); bad.focus?.(); return; }
 
   const t = ticket();
+  const now = new Date();
+  const receipt = "AIM-" + now.toISOString().slice(2,10).replace(/-/g,"") + "-" + Math.random().toString(36).slice(2,6).toUpperCase();
   const data = {
-    timestamp: new Date().toISOString(),
+    receipt,
+    timestamp: now.toISOString(),
     name: $("#name").value.trim(),
     phone: $("#phone").value.trim(),
     affiliation: $("#affiliation").value,
@@ -427,16 +464,17 @@ $("#form").addEventListener("submit", async e => {
     depositor: $("#depositor").value.trim(),
     bank: $("#bank").value,
     arrival: $("#arrival").value,
+    photoConsent: $("#agreePhoto").checked ? "동의" : "",
     userAgent: navigator.userAgent
   };
 
   btn.disabled = true; btn.textContent = "SENDING…";
   try {
     if (CONFIG.endpoint) {
-      await fetch(CONFIG.endpoint, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(data) });
+      await fetch(CONFIG.endpoint, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ columns: CONFIG.columns, data }) });
     } else { await new Promise(r => setTimeout(r, 700)); }
     if (t.price === null) $("#doneText").innerHTML = "테이블 문의가 접수되었습니다.<br>가격과 예약 안내를 연락드릴게요.";
-    $("#doneNum").textContent = "NO. " + Date.now().toString(36).toUpperCase().slice(-6);
+    $("#doneNum").textContent = "NO. " + receipt;
     $("#ticket").classList.add("ok");
     $("#ticket").scrollIntoView({ behavior: "smooth", block: "start" });
   } catch (err) {
